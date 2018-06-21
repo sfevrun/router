@@ -9,10 +9,17 @@ class Menu
   private $_target;
   private $_is_child;
   private $_id_parent;
+  private $_order_id;
 
+  public function __construct(array $donnees)
+  {
+    $this->hydrate($donnees);
+  }
   // Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
   public function hydrate(array $donnees)
   {
+   
+   
 	foreach ($donnees as $key => $value)
 	{
 	  // On récupère le nom du setter correspondant à l'attribut.
@@ -22,7 +29,8 @@ class Menu
 	  if (method_exists($this, $method))
 	  {
 		// On appelle le setter.
-		$this->$method($value);
+       $this->$method($value);
+     
 	  }
 	}
   }
@@ -33,21 +41,17 @@ class Menu
   public function target() { return $this->_target; }
   public function is_child() { return $this->_is_child; }
   public function id_parent() { return $this->_id_parent; }
-
+  public function order_id() { return $this->_order_id; }
   public function setId($id)
   {
-    // L'identifiant du personnage sera, quoi qu'il arrive, un nombre entier.
+    // L'identifiant.
     $this->_id = (int) $id;
   }
         
   public function setNom($nom)
   {
-    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    // Dont la longueur est inférieure à 30 caractères.
-    if (is_string($nom) && strlen($nom) <= 30)
-    {
-      $this->_nom = $nom;
-    }
+         $this->_nom = $nom;
+  
   }
 
   public function setPage($page)
@@ -68,15 +72,16 @@ class Menu
    
   }
 
-  public function setId_parent($exp)
+  public function setId_parent($id_parent)
   {
-    $exp = (int) $exp;
+   
+      $this->_id_parent = (int)$id_parent;
+   
+  }
 
-    // On vérifie que l'expérience est comprise entre 0 et 100.
-    if ($exp >= 0 && $exp <= 100)
-    {
-      $this->_id_parent = $exp;
-    }
+   public function setOrder_id($exp)
+  {
+    $this->_order_id= (int) $order_id;
   }
 }
 ?>

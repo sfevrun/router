@@ -38,12 +38,23 @@ class MenusManager
 
     return new Menu($donnees);
   }
-
-  public function getList()
+  public function getPage($nom)
+  {
+  
+    $q = $this->_db->query('SELECT * FROM pages WHERE nom ="'.$nom.'"');
+    if(!$q)
+    {
+      die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
+    }
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+ 
+    return new Page($donnees);
+  }
+  public function getListWidget()
   {
     $mns = [];
 
-    $q = $this->_db->query('SELECT * FROM Menus ORDER BY nom');
+    $q = $this->_db->query('SELECT * FROM widgets ORDER BY id');
     if(!$q)
     {
       die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
@@ -52,10 +63,33 @@ class MenusManager
     else{
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $mns[] = new Menu($donnees);
+     $m=new Widget($donnees);
+ 
+      $mns[] =  $m;
+     
     }
+     return $mns;
+  }
+  }
+  public function getList()
+  {
+    $mns = [];
 
-    return $mns;
+    $q = $this->_db->query('SELECT * FROM menus ORDER BY id');
+    if(!$q)
+    {
+      die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
+    }
+    //success case
+    else{
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+     $m=new Menu($donnees);
+ 
+      $mns[] =  $m;
+     
+    }
+     return $mns;
   }
   }
 

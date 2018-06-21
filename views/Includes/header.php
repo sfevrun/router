@@ -47,15 +47,20 @@
 						<a href="/">	<img src="public/images/logo.jpg" alt="NOVISAL" class="logo"></a>
 					
 						</div>
-                        <a href="https://www.bbb.org/new-jersey/business-reviews/safety-consultants/novisal-llc-in-roselle-nj-90179437#sealclick" target="_blank">	<img src="public/images/BBBSeal.png" style="margin-top:10px;"></a>
+						
+                        <a class="pull-right" href="https://www.bbb.org/new-jersey/business-reviews/safety-consultants/novisal-llc-in-roselle-nj-90179437#sealclick" target="_blank">	<img src="public/images/BBBSeal.png" style="margin-top:10px;"></a>
 						<nav class="main-navigation">
 							<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
 							<ul class="menu">
-                            <li class="menu-item"><a href="/"><i class="fa fa-home"></i> HOME</a></li>
-								<li class="menu-item"><a href="about-us.html">About us</a></li>
-								<li class="menu-item"><a href="our-offer.html">Our Offer</a></li>
-								<li class="menu-item"><a href="customer-protection.html">Customer Protection</a></li>
-								<li class="menu-item"><a href="contact.html">Contact</a></li>
+                           <!-- <li class="menu-item"><a href="/"><i class="fa fa-home"></i> HOME</a></li>-->
+							<?php 
+
+								foreach ($menu as $m)
+								{
+									echo '<li class="menu-item"><a href="'.$m->nom().'">'.$m->nom().'</a><li>';
+								}
+
+								?>
 							</ul>
 						</nav>
 						

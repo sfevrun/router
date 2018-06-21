@@ -17,22 +17,18 @@ class PagesController{
     } 
     public function index(){
        // $books = $this->model->getBookList();
-       $perso = new Menu([
-        'nom' => 'Victor',
-        'page' => 'Page',
-        'target' => 'Taget',
-        'is_child' => 1,
-        'id_parent' => 0
-      ]);
-      $this->manager->add($perso);
+      
         $menu = $this->manager->getList();
+        $page = $this->manager->getPage('Home');
+        $widget = $this->manager->getListWidget();
         include 'views/page.php';
    
     }
     public function show($id){
-       // show the requested book
-			$book = $this->model->getBook($id);
-			include 'views/book.php';
+        $menu = $this->manager->getList();
+        $widget = $this->manager->getListWidget();
+       $page = $this->manager->getPage($id);
+	  include  'views/page.php';
    
     }
 }

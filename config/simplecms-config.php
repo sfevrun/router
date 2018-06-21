@@ -1,5 +1,5 @@
 <?php
-    define('DB_NAME', 'novisal_db');
+    define('DB_NAME', 'dbnovisal');
     define('DB_USER', 'root');
     define('DB_PASSWORD', '');
     define('DB_HOST', 'localhost');
