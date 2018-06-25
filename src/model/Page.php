@@ -11,7 +11,7 @@ class Page
   private $_is_home;
   private $_file;
   private $_order_id;
-
+  
   public function __construct(array $donnees)
   {
     $this->hydrate($donnees);

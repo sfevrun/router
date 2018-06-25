@@ -2,7 +2,7 @@
 namespace App\model;
 use App\model\Menu;
 use PDO;
-class MenusManager
+class AdminManager
 {
   private $_db; // Instance de PDO
 
@@ -10,6 +10,19 @@ class MenusManager
   {
     $this->setDb($db);
   }
+  public function addPage(Page $page)
+  {
+    $q = $this->_db->prepare('INSERT INTO pages(nom, titre, ptext, file, is_home,order_id) VALUES(:nom, :titre, :ptext, :file, :is_home,:order_id)');
+
+    $q->bindValue(':nom', $page->nom());
+    $q->bindValue(':titre', $page->titre());
+    $q->bindValue(':ptext', $page->ptext());
+    $q->bindValue(':file', $page->file());
+    $q->bindValue(':is_home', $page->is_home());
+    $q->bindValue(':order_id', $page->order_id(), PDO::PARAM_INT);
+    $q->execute();
+  }
+
 
   public function add(Menu $mn)
   {
@@ -42,14 +55,12 @@ class MenusManager
   {
   
     $q = $this->_db->query('SELECT * FROM pages WHERE nom ="'.$nom.'"');
-   // echo $nom;
     if(!$q)
     {
       die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
     }
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-   // echo json_encode($donnees);
-   // die("Execute query error, because: ". print_r($donnees,true) );
+ 
     return new Page($donnees);
   }
   public function getListWidget()
@@ -73,6 +84,28 @@ class MenusManager
      return $mns;
   }
   }
+  public function getAllPage()
+  {
+    $mns = [];
+
+    $q = $this->_db->query('SELECT * FROM pages ORDER BY id');
+    if(!$q)
+    {
+      die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
+    }
+    //success case
+    else{
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+     $m=new Page($donnees);
+ 
+      $mns[] =  $m;
+     
+    }
+     return $mns;
+  }
+  }
+
   public function getList()
   {
     $mns = [];

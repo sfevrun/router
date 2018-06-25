@@ -3,9 +3,11 @@
 require 'vendor/autoload.php'; 
 
 $router = new App\Routers\Router($_GET['url']); 
-//$router->get('/', function(){ echo "Bienvenue sur ma homepage !"; }); 
-$router->get('/posts/:id', function($id){ echo "Voila l'article $id"; }); 
+
 $router->get('/', "Pages#index"); 
 $router->get('/:id', "Pages#show"); 
+$router->get('/Admin/addPage', "Admin#viewAddPage"); 
+$router->post('/Admin/savePage', "Admin#AddPage"); 
+$router->get('/Admin/allPage', "Admin#AllPage"); 
 $router->run(); 
 ?>

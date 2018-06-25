@@ -57,7 +57,7 @@
 
 								foreach ($menu as $m)
 								{
-									echo '<li class="menu-item"><a href="'.$m->nom().'">'.$m->nom().'</a><li>';
+									echo '<li class="menu-item"><a href="'.$m->page().'">'.$m->nom().'</a><li>';
 								}
 
 								?>
