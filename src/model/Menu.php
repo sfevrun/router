@@ -79,7 +79,7 @@ class Menu
    
   }
 
-   public function setOrder_id($exp)
+   public function setOrder_id($order_id)
   {
     $this->_order_id= (int) $order_id;
   }

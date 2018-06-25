@@ -54,16 +54,16 @@
                                 
                                      <li class="init-un-active">   <a href="" ><span class="glyphicon glyphicon-home"></span>HOME</a> </li>
                                      <li>
-                                            <a href="" ><span class="glyphicon glyphicon-file"></span>Menus</a>
+                                            <a href="addmenu" ><span class="glyphicon glyphicon-file"></span>Menus</a>
                                         </li>
                                      <li>
-                                           <a href="" ><span class="glyphicon glyphicon-comment"></span> Pages</a>
+                                           <a href="allPage" ><span class="glyphicon glyphicon-comment"></span> Pages</a>
                                     </li>
                                     <li>
-                                            <a href="" ><span class="glyphicon glyphicon-file"></span>Widgets</a>
+                                            <a href="Admin/addmenu" ><span class="glyphicon glyphicon-file"></span>Widgets</a>
                                         </li>
                                      <li>
-                                           <a href="" ><span class="glyphicon glyphicon-comment"></span> Utilisateur</a>
+                                           <a href="Admin/addmenu" ><span class="glyphicon glyphicon-comment"></span> Utilisateur</a>
                                     </li>
                                     
                               

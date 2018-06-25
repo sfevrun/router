@@ -40,7 +40,7 @@ class AdminController{
             $pa->setTitre($_POST['titre']);
             $pa->setPtext($_POST['ptext']);
             $pa->setFile($_POST['file']);
-         $pa->setIs_home(1);
+         $pa->setIs_home(0);
          $pa->setOrder_id(0);
        //  (:nom, :titre, :ptext, :ptext1, :is_home,order_id)
         //    $method = 'set'.ucfirst($key);
@@ -54,7 +54,9 @@ class AdminController{
                 $errors = $e->getErrors();
             }
         }
-        redirect('/Admin/allPage'); 
+        //$this->redirect('anotherControllerName/myCustomAction');
+        $this->redirect('AllPage');
+     //   redirect('/Admin/allPage'); 
      //   $page = $this->manager->addPage($page);
 	 // include  'AdminSite/listepages.php';
    
@@ -68,11 +70,40 @@ class AdminController{
       	  include  'AdminSite/listepages.php';
    
     }
-    public function show($id){
-        $menu = $this->manager->getList();
-        $widget = $this->manager->getListWidget();
-       $page = $this->manager->getPage($id);
-	  include  'views/page.php';
+   
+    public function viewAddMenu(){
+        $menus=$this->manager->getList();
+        $page = $this->manager->getAllPage();
+          include  'AdminSite/addmenu.php';
+    } 
+    public function AddMenu(){
+        if (isset($_POST['form-submitted'])) { 
+            $arr=array();;
+            $pa=new Menu($arr);
+            $pa->setNom($_POST['nom']);
+            $pa->setPage($_POST['page']);
+            $pa->setTarget('');
+            $pa->setIs_child(0);
+
+            $pa->setId_parent(0);
+            $pa->setOrder_id(0);
+            try {
+            $this->manager->add( $pa);
+         //   $page = $this->manager->getAllPage();
+            } catch (ValidationException $e) {
+                $errors = $e->getErrors();
+            }
+        }
+        redirect('/Admin/allmenus'); 
+     
+    }
+    public function AllMenus(){
+         try {
+               $page = $this->manager->getAllPage();
+            } catch (ValidationException $e) {
+                $errors = $e->getErrors();
+            }
+      	  include  'AdminSite/allmenus.php';
    
     }
 }
