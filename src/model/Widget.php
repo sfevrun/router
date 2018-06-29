@@ -35,12 +35,13 @@ class Widget
   public function titre() { return $this->_titre; }
   public function ptext() { return $this->_ptext; }
   public function ptext1() { return $this->_ptext1; }
-  public function file() { return $this->_file; }
   public function id_parent() { return $this->_id_parent; }
   public function image() { return $this->_image; }
   public function image1() { return $this->_image1; }
   public function image2() { return $this->_image2; }
+  public function file() { return $this->_file; }
   public function order_id() { return $this->_order_id; }
+  
   public function setId($id)
   {
     $this->_id = (int) $id;
@@ -87,7 +88,10 @@ class Widget
       $this->_image2 = $image2;
    
   }
-
+  public function setFile($file)
+  {
+     $this->_file = $file;
+  }
    public function setOrder_id($order_id)
   {
     $this->_order_id= (int) $order_id;

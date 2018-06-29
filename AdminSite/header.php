@@ -60,7 +60,7 @@
                                            <a href="allPage" ><span class="glyphicon glyphicon-comment"></span> Pages</a>
                                     </li>
                                     <li>
-                                            <a href="Admin/addmenu" ><span class="glyphicon glyphicon-file"></span>Widgets</a>
+                                            <a href="addwidget" ><span class="glyphicon glyphicon-file"></span>Widgets</a>
                                         </li>
                                      <li>
                                            <a href="Admin/addmenu" ><span class="glyphicon glyphicon-comment"></span> Utilisateur</a>

@@ -3,6 +3,7 @@ namespace App\Controller;
 use App\model\AdminManager;
 use App\model\Menu;
 use App\model\Page;
+use App\model\Widget;
 use PDO;
 class AdminController{
     public $model;
@@ -49,13 +50,14 @@ class AdminController{
           //  $file      = isset($_POST['file'])?   $_POST['file'] :NULL;
            try {
             $this->manager->addPage( $pa);
-            $page = $this->manager->getAllPage();
+          //  $page = $this->manager->getAllPage();
+          header( 'Location: allPage' ) ;
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
         }
         //$this->redirect('anotherControllerName/myCustomAction');
-        $this->redirect('AllPage');
+      //  $this->redirect('AllPage');
      //   redirect('/Admin/allPage'); 
      //   $page = $this->manager->addPage($page);
 	 // include  'AdminSite/listepages.php';
@@ -88,14 +90,15 @@ class AdminController{
             $pa->setId_parent(0);
             $pa->setOrder_id(0);
             try {
-            $this->manager->add( $pa);
+            $this->manager->add( $pa); 
+            header( 'Location: addmenu' ) ;
          //   $page = $this->manager->getAllPage();
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
         }
-        redirect('/Admin/allmenus'); 
      
+       
     }
     public function AllMenus(){
          try {
@@ -106,5 +109,48 @@ class AdminController{
       	  include  'AdminSite/allmenus.php';
    
     }
+
+    public function viewAddWidget(){
+        $dir = "views/pages/";
+            $a = scandir($dir);
+            $b = scandir($dir,1);
+
+          // die($b);
+          include  'AdminSite/addwidget.php';
+    } 
+    public function AddWidget(){
+        if (isset($_POST['form-submitted'])) { 
+            $arr=array();
+            $filename = $_FILES['image']['name'];
+            $pa=new Widget($arr);
+            $pa->setNom($_POST['nom']);
+            $pa->setTitre($_POST['titre']);
+            $pa->setPtext($_POST['ptext']);
+            $pa->setPtext1($_POST['ptext1']);
+            $pa->setImage($filename);
+            $pa->setImage1($filename);
+          //  $pa->setImage2($_POST['nom']);
+            $pa->setFile($_POST['wfile']);
+            $pa->setOrder_id(0);
+              // $name     = $_FILES['image1']['name'];
+           // $tmpName  = $_FILES['image1']['tmp_name'];
+           // $error    = $_FILES['image1']['error'];
+           // $size     = $_FILES['image1']['size'];
+          
+          //  $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+         
+             $destination = 'views/wImage/'. $filename;
+      
+           try {
+            $this->manager->addWidget( $pa);
+            move_uploaded_file( $_FILES['image']['tmp_name'] , $destination );
+            header( 'Location: allpage' ) ;
+            } catch (ValidationException $e) {
+                $errors = $e->getErrors();
+            }
+        }
+  
+    }
+
 }
 ?>

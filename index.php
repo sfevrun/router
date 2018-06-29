@@ -12,5 +12,9 @@ $router->get('/Admin/allPage', "Admin#AllPage");
 $router->get('/Admin/addmenu', "Admin#viewAddMenu"); 
 $router->post('/Admin/saveMenu', "Admin#AddMenu"); 
 $router->get('/Admin/allmenus', "Admin#AllMenu"); 
+
+////////////////////////////////////////////////
+$router->get('/Admin/addwidget', "Admin#viewAddWidget"); 
+$router->post('/Admin/saveWidget', "Admin#AddWidget"); 
 $router->run(); 
 ?>

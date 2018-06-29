@@ -22,6 +22,22 @@ class AdminManager
     $q->bindValue(':order_id', $page->order_id(), PDO::PARAM_INT);
     $q->execute();
   }
+ 
+  public function addWidget(Widget $page)
+  {
+    $q = $this->_db->prepare('INSERT INTO widgets(nom, titre, ptext,ptext1,image,image1,image2, file, order_id) VALUES(:nom, :titre, :ptext, :ptext1,:image,:image1,:image2, :file, :order_id)');
+
+    $q->bindValue(':nom', $page->nom());
+    $q->bindValue(':titre', $page->titre());
+    $q->bindValue(':ptext', $page->ptext());
+    $q->bindValue(':ptext1', $page->ptext1());
+    $q->bindValue(':image', $page->image());
+    $q->bindValue(':image1', $page->image1());
+    $q->bindValue(':image2', $page->image2());
+    $q->bindValue(':file', $page->file());
+     $q->bindValue(':order_id', $page->order_id(), PDO::PARAM_INT);
+    $q->execute();
+  }
 
 
   public function add(Menu $mn)
