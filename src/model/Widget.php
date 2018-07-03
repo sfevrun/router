@@ -14,6 +14,7 @@ class Widget
   private $_image2;
   private $_file;
   private $_order_id;
+  private $_chlids;
 
   public function __construct(array $donnees)
   {
@@ -41,6 +42,7 @@ class Widget
   public function image2() { return $this->_image2; }
   public function file() { return $this->_file; }
   public function order_id() { return $this->_order_id; }
+  public function chlids() { return $this->_chlids; }
   
   public function setId($id)
   {
@@ -96,5 +98,10 @@ class Widget
   {
     $this->_order_id= (int) $order_id;
   }
+
+    public function setChlids($chlids)
+  {
+    $this->_chlids= $chlids;
+  } 
 }
 ?>

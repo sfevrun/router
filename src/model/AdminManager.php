@@ -23,22 +23,31 @@ class AdminManager
     $q->execute();
   }
  
+  public function addWidgetOnPager(WidgetPage $page)
+  {
+    $q = $this->_db->prepare('INSERT INTO widgetpage(id_page, id_widget, order_id) VALUES(:id_page, :id_widget,:order_id)');
+
+    $q->bindValue(':id_page', $page->id_page());
+    $q->bindValue(':id_widget', $page->id_widget());
+    $q->bindValue(':order_id', $page->order_id(), PDO::PARAM_INT);
+    $q->execute();
+  }
   public function addWidget(Widget $page)
   {
-    $q = $this->_db->prepare('INSERT INTO widgets(nom, titre, ptext,ptext1,image,image1,image2, file, order_id) VALUES(:nom, :titre, :ptext, :ptext1,:image,:image1,:image2, :file, :order_id)');
+    $q = $this->_db->prepare('INSERT INTO widgets(nom, titre, ptext,ptext1,id_parent,image,image1,image2, file, order_id) VALUES(:nom, :titre, :ptext, :ptext1,:id_parent,:image,:image1,:image2, :file, :order_id)');
 
     $q->bindValue(':nom', $page->nom());
     $q->bindValue(':titre', $page->titre());
     $q->bindValue(':ptext', $page->ptext());
     $q->bindValue(':ptext1', $page->ptext1());
-    $q->bindValue(':image', $page->image());
+    $q->bindValue(':id_parent', $page->id_parent());
+     $q->bindValue(':image', $page->image());
     $q->bindValue(':image1', $page->image1());
     $q->bindValue(':image2', $page->image2());
     $q->bindValue(':file', $page->file());
      $q->bindValue(':order_id', $page->order_id(), PDO::PARAM_INT);
     $q->execute();
   }
-
 
   public function add(Menu $mn)
   {
@@ -84,6 +93,28 @@ class AdminManager
     $mns = [];
 
     $q = $this->_db->query('SELECT * FROM widgets ORDER BY id');
+    if(!$q)
+    {
+      die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
+    }
+    //success case
+    else{
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+     $m=new Widget($donnees);
+ 
+      $mns[] =  $m;
+     
+    }
+     return $mns;
+  }
+  }
+  //////////////////////////////////////////
+  public function getListWidgetOnPage($id)
+  {
+    $mns = [];
+
+    $q = $this->_db->query('SELECT w.* FROM widgets w JOIN widgetpage p on w.id=p.id_widget WHERE id_page = '.$id);
     if(!$q)
     {
       die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );

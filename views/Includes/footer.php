@@ -1,5 +1,5 @@
 <footer class="site-footer wow fadeInUp">
-				<div class="footer-top">
+			<!--<div class="footer-top">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-3 col-sm-6">
@@ -44,25 +44,24 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 				<div class="footer-bottom">
 					<div class="container">
 						<div class="branding pull-left">
-							<img src="images/logo-footer.png" alt="Company Name" class="logo">
-							<h1 class="site-title"><a href="index.html">Company Name</a></h1>
-							<small class="site-description">Tagline goes here</small>
+						<img src="public/images/logo.jpg" alt="NOVISAL" class="logo">
+						
 						</div>
 
 						<div class="contact-links pull-right">
-							<a href="https://goo.gl/maps/oQKxg"><i class="fa fa-map-marker"></i> 983 Avenue Street, New York</a>
-							<a href="tel:+134453455345"><i class="fa fa-phone"></i> +1 344 5345 5345</a>
-							<a href="mailto:contact@companyname.com"><i class="fa fa-envelope"></i> contact@companyname.com</a>
+							<a href="https://goo.gl/maps/oQKxg"><i class="fa fa-map-marker"></i> 115 Springcrest Drive. Hightstown, New Jersey 08520</a>
+							<a href="tel:+134453455345"><i class="fa fa-phone"></i> (888) 567 2338</a>
+							<a href="mailto:safety@novisal.com"><i class="fa fa-envelope"></i> safety@novisal.com</a>
 						</div>
 					</div>
 				</div>
 				<div class="colophon">
 					<div class="container">
-						<p class="copy">Copyright 2014 Company Name, Designed by Themezy, All right reserved.</p>
+						<p class="copy">Copyright 2013 Novisal. All Rights Reserved..</p>
 					</div>
 				</div>
 			</footer> <!-- .site-footer -->

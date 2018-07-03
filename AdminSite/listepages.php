@@ -8,7 +8,7 @@ require_once("header.php");
 <tr><th>Name</th><Th>Title</th><th></th><th></th></tr>
 <?php
   foreach ($page as $p) {
-    echo '<tr><td>'.$p->nom().'</td><td>'.$p->titre().'</td><td><a href="Add"><span class="glyphicon glyphicon-edit"></span></a></td><td><a href=""><span class="glyphicon glyphicon-edit"></span></a></td>';
+    echo '<tr><td>'.$p->nom().'</td><td>'.$p->titre().'</td><td><a href="WidgetOnPage/'.$p->id().'"><span class="glyphicon glyphicon-edit"></span></a></td><td><a href=""><span class="glyphicon glyphicon-edit"></span></a></td>';
 }
 
 ?>

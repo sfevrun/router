@@ -4,6 +4,7 @@ use App\model\AdminManager;
 use App\model\Menu;
 use App\model\Page;
 use App\model\Widget;
+use App\model\WidgetPage;
 use PDO;
 class AdminController{
     public $model;
@@ -13,7 +14,8 @@ class AdminController{
     public function __construct()  
     {  
        // $this->model = new Model();
-       $db = new PDO('mysql:host=localhost;dbname=dbnovisal', 'root', '');
+     $db = new PDO('mysql:host=localhost;dbname=dbnovisal', 'root', '');
+        // $db = new PDO('mysql:host=localhost;dbname=telemat8_stopeme_db', 'telemat8_stopeme', 'P@ssw0rd');
        $this->manager = new AdminManager($db); 
 
     } 
@@ -43,12 +45,7 @@ class AdminController{
             $pa->setFile($_POST['file']);
          $pa->setIs_home(0);
          $pa->setOrder_id(0);
-       //  (:nom, :titre, :ptext, :ptext1, :is_home,order_id)
-        //    $method = 'set'.ucfirst($key);
-          //  $nom       = isset($_POST['nom']) ?   $_POST['nom']  :NULL;
-           // $titre      = isset($_POST['titre'])?   $_POST['titre'] :NULL;
-          //  $file      = isset($_POST['file'])?   $_POST['file'] :NULL;
-           try {
+             try {
             $this->manager->addPage( $pa);
           //  $page = $this->manager->getAllPage();
           header( 'Location: allPage' ) ;
@@ -56,11 +53,7 @@ class AdminController{
                 $errors = $e->getErrors();
             }
         }
-        //$this->redirect('anotherControllerName/myCustomAction');
-      //  $this->redirect('AllPage');
-     //   redirect('/Admin/allPage'); 
-     //   $page = $this->manager->addPage($page);
-	 // include  'AdminSite/listepages.php';
+       
    
     }
     public function AllPage(){
@@ -111,10 +104,10 @@ class AdminController{
     }
 
     public function viewAddWidget(){
-        $dir = "views/pages/";
+        $dir = "views/pages/widget/";
             $a = scandir($dir);
             $b = scandir($dir,1);
-
+            $widget = $this->manager->getListWidget();
           // die($b);
           include  'AdminSite/addwidget.php';
     } 
@@ -127,6 +120,7 @@ class AdminController{
             $pa->setTitre($_POST['titre']);
             $pa->setPtext($_POST['ptext']);
             $pa->setPtext1($_POST['ptext1']);
+              $pa->setId_parent($_POST['id_parent']);
             $pa->setImage($filename);
             $pa->setImage1($filename);
           //  $pa->setImage2($_POST['nom']);
@@ -144,13 +138,42 @@ class AdminController{
            try {
             $this->manager->addWidget( $pa);
             move_uploaded_file( $_FILES['image']['tmp_name'] , $destination );
-            header( 'Location: allpage' ) ;
+            header( 'Location: addwidget' ) ;
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
         }
   
     }
+
+
+    public function viewWdgetOnPage($idpage){
+        $widget = $this->manager->getListWidget();
+        $widgetpage = $this->manager->getListWidgetOnPage($idpage);
+        $page_id=$idpage;
+          include  'AdminSite/widgetpage.php';
+    } 
+
+
+    public function AddWidgetOnPage(){
+        if (isset($_POST['form-submitted'])) { 
+            $arr=array();
+            $pa=new WidgetPage($arr);
+            $pa->setId_page($_POST['id_page']);
+            $pa->setId_widget($_POST['id_widget']);
+            $pa->setOrder_id(0);
+            
+           try {
+            $this->manager->addWidgetOnPager( $pa);
+            $path=
+            header( 'Location: WidgetOnPage/'.$pa->id_page());
+            } catch (ValidationException $e) {
+                $errors = $e->getErrors();
+            }
+        }
+  
+    }
+
 
 }
 ?>

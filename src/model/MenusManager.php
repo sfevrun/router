@@ -73,6 +73,51 @@ class MenusManager
      return $mns;
   }
   }
+    //////////////////////////////////////////
+    public function getListWidgetOnPage($id)
+    {
+      $mns = [];
+  
+      $q = $this->_db->query('SELECT w.* FROM widgets w JOIN widgetpage p on w.id=p.id_widget WHERE id_page = '.$id);
+      if(!$q)
+      {
+        die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
+      }
+      //success case
+      else{
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+       $m=new Widget($donnees);
+   
+        $mns[] =  $m;
+       
+      }
+       return $mns;
+    }
+    }
+
+     //////////////////////////////////////////
+     public function getListWidgetChild($id)
+     {
+       $mns = [];
+   
+       $q = $this->_db->query('SELECT * FROM widgets  WHERE id_parent = '.$id);
+       if(!$q)
+       {
+         die("Execute query error, because: ". print_r($this->_db->errorInfo(),true) );
+       }
+       //success case
+       else{
+       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+       {
+        $m=new Widget($donnees);
+    
+         $mns[] =  $m;
+        
+       }
+        return $mns;
+     }
+     }
   public function getList()
   {
     $mns = [];

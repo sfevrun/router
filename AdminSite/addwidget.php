@@ -5,9 +5,9 @@ require_once("header.php");
 tinymce.init({
   selector: 'textarea',
   height: 100,
-  theme: 'modern',
-  plugins: 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
-  toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+  //theme: 'modern',
+ // plugins: 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
+  toolbar1: 'bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
   image_advtab: true,
   templates: [
     { title: 'Test template 1', content: 'Test 1' },
@@ -47,10 +47,11 @@ tinymce.init({
                                     <input type="text" class="form-control" name="titre" value="" />
                                 </div>
                                 </div>
-                    
-                         <label class="col-sm-3 control-label">File</label>
-                         <div class="col-sm-9" style="margin-bottom:5px;">
+                    <div class="col-md-6">
+                         <label class="col-sm-2 control-label">File</label>
+                         <div class="col-sm-10" style="margin-bottom:5px;">
                              <select class="form-control" name="wfile">
+                          <option value="">--Select File--</option>
                              <?php
                              foreach ($b as $value) {
                                         echo '<option value="'.$value.'">'.$value.'</option>';
@@ -59,6 +60,25 @@ tinymce.init({
                                 
                              </select>
                            </div>
+                           </div>
+                    <div class="col-md-6">
+                    <label class="col-sm-2 control-label">Parent</label>
+                         <div class="col-sm-10" style="margin-bottom:5px;">
+                             <select class="form-control" name="id_parent">
+                             <option value="0">--Select Parent--</option>
+                             <?php
+                             foreach ($widget as $w) {
+                                        echo '<option value="'.$w->id().'">'.$w->nom().'</option>';
+                                    }
+                                    ?>
+                                
+                             </select>
+                           </div>
+                    </div>
+
+
+
+
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -107,15 +127,27 @@ tinymce.init({
                     <div class="modal-footer">
                  <!--   <input type="submit" value="Créer ce personnage" class="btn btn-warning" name="form-submitted" />-->
                   <input type="hidden" name="form-submitted" value="1" />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="SAVE"  class="btn btn-primary"/>
                    
-                        <button type="button" ng-click="cancel()" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" ng-click="cancel()" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                     
 
                 </div>
 
             </form>
+
+            <table  class="table table-striped table-hover">
+<tr><th>Name</th><Th>File</th><th></th><th></th></tr>
+<?php
+  foreach ($widget as $m) {
+    echo '<tr><td>'.$m->nom().'</td><td>'.$m->file().'</td><td><a href="Add"><span class="glyphicon glyphicon-edit"></span></a></td>
+    <td><a href=""  class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a></td>';
+}
+
+?>
+
+</table>
 <?php
 require_once("footer.php");
 ?>

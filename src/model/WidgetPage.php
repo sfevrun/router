@@ -1,7 +1,7 @@
 <?php
 namespace App\model;
 
-class Widget
+class WidgetPage
 {
   private $_id;
   private $_id_page;

@@ -16,5 +16,8 @@ $router->get('/Admin/allmenus', "Admin#AllMenu");
 ////////////////////////////////////////////////
 $router->get('/Admin/addwidget', "Admin#viewAddWidget"); 
 $router->post('/Admin/saveWidget', "Admin#AddWidget"); 
+/////////////////////////////////////////////////////////
+$router->get('/Admin/WidgetOnPage/:id', "Admin#viewWdgetOnPage"); 
+$router->post('/Admin/saveWidgetOnPage', "Admin#AddWidgetOnPage"); 
 $router->run(); 
 ?>
